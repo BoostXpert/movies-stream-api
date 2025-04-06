@@ -44,3 +44,9 @@ def get_link(movie_id):
 
     drive_id = MOVIE_MAP.get(movie_id)
     return redirect(f"https://drive.google.com/uc?export=download&id={drive_id}")
+
+
+        if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
