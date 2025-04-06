@@ -3,6 +3,14 @@ import jwt
 import time
 import os
 
+from collections import defaultdict
+from datetime import datetime
+
+# Track requests per IP per day
+request_log = defaultdict(list)
+
+DAILY_LIMIT = 5  # Example: 5 movie links per IP per day
+
 app = Flask(__name__)
 
 SECRET_KEY = "20303929292"
@@ -14,6 +22,17 @@ MOVIE_MAP = {
 
 @app.route("/generate_token/<movie_id>")
 def generate_token(movie_id):
+    user_ip = request.remote_addr
+    now = datetime.utcnow().date()
+
+    # Filter today's requests
+    today_requests = [ts for ts in request_log[user_ip] if ts == now]
+
+    if len(today_requests) >= DAILY_LIMIT:
+        return jsonify({"error": "Daily limit reached"}), 429
+
+    request_log[user_ip].append(now)
+
     if movie_id not in MOVIE_MAP:
         return jsonify({"error": "Invalid movie"}), 404
 
