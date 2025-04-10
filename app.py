@@ -9,7 +9,7 @@ from datetime import datetime
 # Track requests per IP per day
 request_log = defaultdict(list)
 
-DAILY_LIMIT = 5  # Example: 5 movie links per IP per day
+DAILY_LIMIT = 50000  # Example: 5 movie links per IP per day
 
 app = Flask(__name__)
 
