@@ -17,7 +17,7 @@ SECRET_KEY = "20303929292"
 
 MOVIE_MAP = {
     "spiderman2021": "1AVRALg3PhoEzHuvSh29XhFwwLw4CfX8J",
-    "inception2010": "1XxYyZZabcdeFghijKlmNOPqrstu"
+    "test": "124fC_15HbhS9lXpyJBh1FJBurw2AQJXn"
 }
 
 @app.route("/generate_token/<movie_id>")
